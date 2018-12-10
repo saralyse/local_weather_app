@@ -1,0 +1,5 @@
+scripts/config.js
+config.env
+env-playground/server.js
+.env
+node_modules/dotenv/config.js
