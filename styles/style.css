@@ -1,0 +1,38 @@
+/**
+   *** 01 - Global Styles
+   *** 02 - Typography
+   *** 03 - Page Structure
+   *** 04 - Content & Media
+   *** 05 - Footer
+   *** 06 - Miscellaneous
+**/
+
+
+/* 01 ----- Global Styles ----- */
+body {
+   background-color: rgb(254, 255, 255);
+   font-family: 'Roboto', sans-serif;
+}
+
+
+/* 02 ----- Typography ----- */
+h1 {
+   font-size: 7vw;
+}
+
+
+/* 03 ----- Page Structure ----- */
+.container {
+   padding-top: 20vh;
+}
+
+
+/* 04 ----- Content & Media ----- */
+
+
+
+/* 05 ----- Footer ----- */
+
+
+
+/* 06 ----- Miscellaneous ----- */
