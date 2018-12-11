@@ -1,9 +1,8 @@
-import * as config from '../config.js';
 
 $(document).ready(() => {
   var fahrenheit, celsius;
   var weatherUrl = "https://api.openweathermap.org/data/2.5/weather";
-  var apiKey = config.OWM_API_KEY;
+  var apiKey = '5784cd5acade608a751f7a6777f5b158';
   getLatLon();
 
   function getLatLon() {
@@ -41,22 +40,7 @@ $(document).ready(() => {
         $('#desc').html(desc);
         $('#temp').html(data.main.temp + " &#8451;");
         $('.temp-unit').attr('id', 'c');
-        $('.icon').html("<img src='http://openweathermap.org/img/w/" + data.weather[0].icon + ".png'>");
-
-
-        /*var date = new Date();
-        var sunrise = new Date(data.sys.sunrise * 1000);
-        var sunset = new Date(data.sys.sunset * 1000);
-
-        if (date.getHours() >= sunrise.getHours() && date.getHours() < sunset.getHours()) {
-          var iconID = 'wi wi-owm-day-${result.data.weather[0].id}';
-        } else if (date.getHours() >= sunset.getHours()) {
-          var iconID = 'wi wi-owm-night-${result.data.weather[0].id}';
-        }
-
-        $('.icon').html("<i class=" + iconID + "></i>");
-        */
-
+        $('.icon').html("<i class='wi wi-owm-" + data.weather[0].id + "'></i>");
 
         $('#toggle-button').on('click', () => {
             if ($('.temp-unit').attr('id') == 'c') {
@@ -74,15 +58,23 @@ $(document).ready(() => {
       }
     });
   }
-  
-
-  $('#submit-button').on('click', () => {
-    let zip = $('#change-loc').html();
-    $('#submit-button').attr("href", "https://api.openweathermap.org/data/2.5/weather?zip="+zip+",us"+"&APPID="+apiKey+"&units=metric");
-  })
-
-
 
 });
 
 
+/*
+        var date = new Date();
+        var sunrise = new Date(data.sys.sunrise * 1000);
+        var sunset = new Date(data.sys.sunset * 1000);
+
+        if (date.getHours() >= sunrise.getHours() && date.getHours() < sunset.getHours()) {
+          var iconID = 'day-${data.weather[0].id}';
+        } else if (date.getHours() >= sunset.getHours()) {
+          var iconID = 'night-${data.weather[0].id}';
+        }
+
+        $('#submit-button').on('click', () => {
+        let zip = $('#change-loc').html();
+        $('#submit-button').attr("href", "https://api.openweathermap.org/data/2.5/weather?zip="+zip+",us"+"&APPID="+apiKey+"&units=metric");
+        })
+        */

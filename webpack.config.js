@@ -23,10 +23,14 @@ module.exports = {
     }]
   },
   resolve: {
+    modules: [
+      path.resolve(__dirname, 'local-weather'),
+      path.resolve(__dirname, 'node_modules')
+    ],
     extensions: ['.json', '.js', '.jsx', '.css']
   },
   devtool: 'source-map',
   devServer: {
     publicPath: path.join('/dist/')
-  }
+  },
 };
