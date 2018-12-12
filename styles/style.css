@@ -16,19 +16,69 @@ body {
 
 
 /* 02 ----- Typography ----- */
-h1 {
-   font-size: 7vw;
+#city {
+   font-weight: 200;
+   font-size: 38px;
+   margin-top: 70px;
+   margin-bottom: 2px;
+}
+
+#desc {
+   font-size: 20px;
+   font-weight: 300;
+   padding: 10px;
+}
+
+#temp {
+   font-size: 45px;
+   font-weight: 300;
+   vertical-align: sub;
+}
+
+.temp-unit {
+   vertical-align: super;
+   font-size: 20px;
 }
 
 
 /* 03 ----- Page Structure ----- */
-.container {
-   padding-top: 20vh;
+.weather-container {
+   background-color: rgb(254, 255, 255);
+   background-repeat: no-repeat;
+   background-size: cover;
+   width: 320px;
+   min-height: 538px;
+   margin-top: 150px;
+   padding: 10px 0;
+   display: inline-block;
+   position: relative;
+   border-radius: 10px;
+   box-shadow: 0px 40px 150px 10px rgba(69, 69, 69, 0.5);
+   overflow: hidden;
+   transition: background .3s ease-out;
+   z-index:3;
+}
+
+.weather-desc {
+   display: inline;
+   padding-top: 20px;
+}
+
+.temp-button {
+   padding-top: 10px;
 }
 
 
 /* 04 ----- Content & Media ----- */
+i {
+   font-size: 24px;
+}
 
+#toggle-button {
+   background: none;
+   border: none;
+   color: black;
+}
 
 
 /* 05 ----- Footer ----- */
