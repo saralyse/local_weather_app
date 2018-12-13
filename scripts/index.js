@@ -13,7 +13,7 @@ $(document).ready(() => {
         let lat = position.coords.latitude;
         let lon = position.coords.longitude;
         currentUrl += "?lat="+lat+"&lon="+lon+"&APPID="+apiKeyC+"&units=metric";
-        forecastUrl += "?lat="+lat+"&lon="+lon+"&APPID="+apiKeyF+"&units=imperial";
+        forecastUrl += "?lat="+lat+"&lon="+lon+"&APPID="+apiKeyF+"&units=metric";
         getCurrentData();
         //getForecastData();
       });
@@ -26,7 +26,7 @@ $(document).ready(() => {
           let lat = data.latitude;
           let lon = data.longitude;
           currentUrl += "?lat="+lat+"&lon="+lon+"&APPID="+apiKeyC+"&units=metric";
-          forecastUrl += "?lat="+lat+"&lon="+lon+"&APPID="+apiKeyF+"&units=imperial";
+          forecastUrl += "?lat="+lat+"&lon="+lon+"&APPID="+apiKeyF+"&units=metric";
           getCurrentData();
           //getForecastData();
         },
@@ -53,16 +53,15 @@ $(document).ready(() => {
         var celsius = Math.round(temperature);
         var fahrenheit = Math.round(celsius * 1.8 + 32);
         var desc = data.weather[0].main;
-        var code = 301;
+        var code = [data.weather[0].id];
         var unitC = " &#8451;";
         var unitF = " &#8457;";
-// [data.weather[0].id];
-       
+        //var code = 301;
         $('#city').html(data.name);
 
         $('#desc').html(data.weather[0].main);
-        $('#temp').html(Math.round(data.main.temp));
-        $('.temp-unit').attr('id', 'c').html(unitC);
+        $('#temp').html(fahrenheit);
+        $('.temp-unit').attr('id', 'f').html(unitF);
         $('.icon').html("<i class='wi wi-owm-" + data.weather[0].id + "'></i>");
 
         $('#toggle-button').on('click', () => {
@@ -75,11 +74,54 @@ $(document).ready(() => {
             }
         });
 
-        function getTime () {
+
+        function setPhoto () {
           var date = new Date();
-          var time = date.getHours();
-          
-          if (time > 19 || time < 6) {
+          var currentTime = date.getHours();
+          var sunrise = new Date(data.sys.sunrise * 1000);
+          var sunset = new Date(data.sys.sunset * 1000);
+          var day = (date.getHours() > sunrise.getHours() && date.getHours() < sunset.getHours());
+          var night = (date.getHours() > sunset.getHours());
+          var sunsetTime = (date.getHours() == sunset.getHours());
+          var sunriseTime = (date.getHours() == sunrise.getHours());
+         
+        if (sunsetTime || sunriseTime) {
+            // sunset theme
+            if (code >= 200 && code < 240) {
+              // thunderstorm theme
+              $('.weather-container').css({
+                'background-image': 'url("../img/storm.jpg")',
+                'color': 'white'
+              });
+            } else if (code >= 300 && code <= 531) {
+              // rain theme
+              $('.weather-container').css({
+                'background-image': 'url("../img/rain.jpg")'
+              });
+              $('#city').css({
+                'font-weight': '300'
+              });
+              $('#desc').css({
+                'font-weight': '400'
+              });
+            } else if (code >= 600 && code <=622) {
+               // snow theme
+              $('.weather-container').css({
+                'background-image': 'url("../img/snow.jpg")'
+              });
+            } else if ((code >= 801 && code <= 804) || (code >= 700 && code <= 741)) {
+              // cloudy theme
+              $('.weather-container').css({
+                'background-image': 'url("../img/cloudy.jpg")'
+              });
+            } else {
+              // clear
+              $('.weather-container').css({
+                'background-image': 'url("../img/sunset.jpg")',
+                'color': 'white'
+              });
+            }
+          } else if (night) {
             // night theme
             if (code >= 200 && code < 240) {
               // thunderstorm theme
@@ -98,46 +140,16 @@ $(document).ready(() => {
               $('.weather-container').css({
                 'background-image': 'url("../img/snow.jpg")'
               });
-            } else if (code >= 801 && code <= 804) {
+            } else if ((code >= 801 && code <= 804) || (code >= 700 && code <= 741)) {
               // cloudy theme
               $('.weather-container').css({
-                'background-image': 'url("../img/night.jpg")',
+                'background-image': 'url("../img/night-cloudy.jpg")',
                 'color': 'white'
               });
             } else {
               // night clear
               $('.weather-container').css({
                 'background-image': 'url("../img/night.jpg")',
-                'color': 'white'
-              });
-            }
-          } else if (time > 16 && time < 19) {
-            // sunset theme
-            if (code >= 200 && code < 240) {
-              // thunderstorm theme
-              $('.weather-container').css({
-                'background-image': 'url("../img/storm.jpg")',
-                'color': 'white'
-              });
-            } else if (code >= 300 && code <= 531) {
-              // rain theme
-              $('.weather-container').css({
-                'background-image': 'url("../img/rain.jpg")'
-              });
-            } else if (code >= 600 && code <=622) {
-               // snow theme
-              $('.weather-container').css({
-                'background-image': 'url("../img/snow.jpg")'
-              });
-            } else if (code >= 801 && code <= 804) {
-              // cloudy theme
-              $('.weather-container').css({
-                'background-image': 'url("../img/cloudy.jpg")'
-              });
-            } else {
-              // night clear
-              $('.weather-container').css({
-                'background-image': 'url("../img/sunset.jpg")',
                 'color': 'white'
               });
             }
@@ -153,12 +165,18 @@ $(document).ready(() => {
               $('.weather-container').css({
                 'background-image': 'url("../img/rain.jpg")'
               });
+              $('#city').css({
+                'font-weight': '300'
+              });
+              $('#desc').css({
+                'font-weight': '400'
+              });
             } else if (code >= 600 && code <=622) {
                // snow theme
               $('.weather-container').css({
                 'background-image': 'url("../img/snow.jpg")'
               });
-            } else if (code >= 801 && code <= 804) {
+            } else if ((code >= 801 && code <= 804) || (code >= 700 && code <= 741)) {
               // cloudy theme
               $('.weather-container').css({
                 'background-image': 'url("../img/cloudy.jpg")'
@@ -170,7 +188,7 @@ $(document).ready(() => {
             }
           };
         };
-        getTime();
+        setPhoto();
       },
       error: function(err) {
         alert('Oops something went wrong, Please try again.');
@@ -186,8 +204,17 @@ $(document).ready(() => {
       type: 'GET',
       dataType: 'json',
       success: function(data) {
+        function getTemp() {
+          for (i = 0; i < 5; i++) {
+            var fcTemp = data.list[i].main.temp;
+          }
+        }
+        //var fcTemp = data.list.main.temp;
+        var fcC = Math.round(fcTemp);
+        var fcF = Math.round(fcC * 1.8 + 32);
         
-        $('#fc-temp').html(data.list.main.temp + " &#8457;");
+        $('#fc-temp-1').html(fcF + " &#8457;");
+        $('#fc-temp-2').html(fcF + " &#8457;");
       },
       error: function(err) {
         alert('Oops something went wrong, Please try again.');
@@ -195,11 +222,6 @@ $(document).ready(() => {
       }
     });
   }*/
-
-
-  
-
-
 
 
 });
