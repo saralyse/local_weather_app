@@ -1,11 +1,9 @@
 $(document).ready(() => {
+  var cloudy;
   
-  var fahrenheit, celsius;
-  var code;
   var currentUrl = "https://api.openweathermap.org/data/2.5/weather";
   var forecastUrl = "https://api.openweathermap.org/data/2.5/forecast";
-  //var sunUrl = "https://api.sunrise-sunset.org/json";
-  var apiKeyC = '5784cd5acade608a751f7a6777f5b158';
+  //var apiKeyC = '5784cd5acade608a751f7a6777f5b158';
   var apiKeyF = 'c1c8298c3ffde842d6161c2da1ceb5b0';
   getLatLon();
 
@@ -14,7 +12,7 @@ $(document).ready(() => {
       navigator.geolocation.getCurrentPosition(function(position) { 
         let lat = position.coords.latitude;
         let lon = position.coords.longitude;
-        currentUrl += "?lat="+lat+"&lon="+lon+"&APPID="+apiKeyC+"&units=metric";
+        //currentUrl += "?lat="+lat+"&lon="+lon+"&APPID="+apiKeyC+"&units=metric";
         forecastUrl += "?lat="+lat+"&lon="+lon+"&APPID="+apiKeyF+"&cnt=4&units=imperial";
 
         getForecastData();
@@ -29,7 +27,7 @@ $(document).ready(() => {
         success: function(data) {
           let lat = data.latitude;
           let lon = data.longitude;
-          currentUrl += "?lat="+lat+"&lon="+lon+"&APPID="+apiKeyC+"&units=metric";
+          //currentUrl += "?lat="+lat+"&lon="+lon+"&APPID="+apiKeyC+"&units=metric";
           forecastUrl += "?lat="+lat+"&lon="+lon+"&APPID="+apiKeyF+"&cnt=4&units=imperial";
 
           getForecastData();
@@ -56,30 +54,31 @@ $(document).ready(() => {
       success: function(data) {
         var temp;
         var fahrenheit = Math.round(temp);
-        var celsius = Math.round((fahrenheit -32) / 1.8);
-        var unitC = '<span class="unit"> &#8451;</span>';
+        //var celsius = Math.round((fahrenheit -32) / 1.8);
+        //var unitC = '<span class="unit"> &#8451;</span>';
         var unitF = '<span class="unit"> &#8457;</span>';
 
 
         $('#city').html(data.city.name);
+        $('.current-desc').html(data.list[0].weather[0].main);
 
         for (i = 0; i < data.list.length; i++) {
           let temp = (data.list[i].main.temp);
           let fahrenheit = Math.round(temp);
-          let celsius = Math.round((fahrenheit - 32) / 1.8);
+          //let celsius = Math.round((fahrenheit - 32) / 1.8);
 
           $('#f' + i).html(fahrenheit + unitF);
-          $('#c' + i).html(celsius + unitC).hide();
+          //$('#c' + i).html(celsius + unitC).hide();
 
 
-          $('#toggle-button').on('click', () => {
-            $('#f' + i, '#c' + i).toggle();
-          });
+          //$('#toggle-unit').on('click', () => {
+            //$('#f' + i, '#c' + i).toggle();
+          //});
               
     
           var icon = data.list[i].weather[0].id;
           $('#icon' + i).html("<i class='wi wi-owm-" + icon + "'></i>");
-              
+
           var desc = data.list[i].weather[0].main;
           $('#desc' + i).html(desc);
 
@@ -90,18 +89,6 @@ $(document).ready(() => {
         var date = new Date();
         var time = date.getHours();
         var code = data.list[0].weather[0].id;
-
-        var day = '../img/day.jpg';
-        var rain = '../img/rain.jpg';
-        var cloudy = '../img/cloudy.jpg';
-        var storm = '../img/storm.jpg';
-        var snow = '../img/snow.jpg';
-        var night = '../img/night.jpg';
-        var nightRain = '../img/night-rain.jpg';
-        var nightCloudy = '../img/night-cloudy.jpg';
-        
-      
-
 
         if (time > 16 && time < 19) {
           // sunset theme
@@ -197,7 +184,8 @@ $(document).ready(() => {
           } else if ((code >= 801 && code <= 804) || (code >= 700 && code <= 741)) {
             // cloudy theme
             $('.weather-container').css({
-              'background-image': 'url("../img/cloudy.jpg")'
+              'background-image': 'url("../img/cloudy.jpg")',
+              'color': 'white'
             });
           } else {
             $('.weather-container').css({
