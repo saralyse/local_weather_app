@@ -8,49 +8,50 @@
    </head>
    <body>
       <div class="container text-center">
-         <header>
-            <h1></h1>
-         </header>
          <div class="weather-container">
-            <div class="text-center weather-status">
-               <div class="current-weather">
-                  <div class="location">
-                     <p id="city"></p>
-                  </div>
-                  <div class="current">
-                     <span class="current-icon" id="icon0"></span><span class="current-desc" id="desc0"></span>
-                  </div>
-                  <div class="current-temp-display">
+            <div class="current-weather container text-center">
+               <div class="location">
+                  <p id="city"></p>
+               </div>
+               <div class="current-temp-display">
+                  <button class="btn" id="unit-toggle">
                      <span class="current-temp" id="f0" value="f"></span>
                      <span class="current-temp toggle-c" id="c0" value="c"></span>
-                  </div>
-                  </div>
+                  </button>
                </div>
-               <div class="forecast container">
-                  <span id="fc-day"></span>
-                  <div class="forcast-list">
-                     <div class="weekdays" id="weekday-1">
-                           <span class="fc-day" id="day1"></span>
-                           <span class="fc-icon" id="icon1"></span>
-                           <span class="fc-temp toggle-f" id="f1" value="f"></span>
-                           <span class="fc-temp toggle-c" id="c1" value="c"></span>
+               <div class="current-desc-display container">
+                  <span class="current-icon" id="icon0"><span class="current-desc" id="desc0"></span>
+               </div>
+               
+            </div>
+            <div class="forecast container">
+               <div class="forecast-list">
+                  <div class="weekdays" id="weekday-1">
+                     <span class="fc-day" id="day1"></span>
+                     <div class="icon-temp">
+                        <span class="fc-icon" id="icon1"></span>
+                        <span class="fc-temp toggle-f" id="f1" value="f"></span>
+                        <span class="fc-temp toggle-c" id="c1" value="c"></span>
+                     </div> 
+                  </div>
+                  <div class="weekdays" id="weekday-2">
+                     <span class="fc-day" id="day2"></span>
+                     <div class="icon-temp">
+                        <span class="fc-icon" id="icon2"></span>
+                        <span class="fc-temp toggle-f" id="f2" value="f"></span>
+                        <span class="fc-temp toggle-c" id="c2" value="c"></span>
                      </div>
-                     <div class="weekdays" id="weekday-2">
-                           <span class="fc-day" id="day2"></span>
-                           <span class="fc-icon" id="icon2"></span>
-                           <span class="fc-temp toggle-f" id="f2" value="f"></p>
-                           <span class="fc-temp toggle-c" id="c2" value="c"></span>
-                     </div>
-                     <div class="weekdays" id="weekday-3">
-                           <span class="fc-day" id="day3"></span>
-                           <span class="fc-icon" id="icon3"></span>
-                           <span class="fc-temp toggle-f" id="f3" value="f3"></span>
-                           <span class="fc-temp toggle-c" id="c3" value="c"></span>
+                  </div>
+                  <div class="weekdays" id="weekday-3">
+                     <span class="fc-day" id="day3"></span>
+                     <div class="icon-temp">
+                        <span class="fc-icon" id="icon3"></span>
+                        <span class="fc-temp toggle-f" id="f3" value="f3"></span>
+                        <span class="fc-temp toggle-c" id="c3" value="c"></span>
                      </div>
                   </div>
                </div>
             </div>
-
          </div>
       </div>
 
