@@ -1,58 +1,44 @@
-/**
-   *** 01 - Global Styles
-   *** 02 - Typography
-   *** 03 - Page Structure
-   *** 04 - Content & Media
-   *** 05 - Footer
-   *** 06 - Miscellaneous
-**/
-
-
-/* 01 ----- Global Styles ----- */
 body {
    background-color: rgb(254, 255, 255);
    font-family: 'Roboto', sans-serif;
    text-shadow: 2px, 2px, 4px, inherit;
+   letter-spacing: 1.2px;
 }
 
-
-/* 02 ----- Typography ----- */
 #city {
    font-weight: 200;
    font-size: 38px;
-   margin-top: 70px;
-   margin-bottom: 2px;
+   margin-top: 100px;
+   margin-bottom: 25px;
 }
 
-#desc {
+.current-desc {
    font-size: 24px;
    font-weight: 300;
-   padding: 10px;
+   padding-left: 4px;
+}
+
+.current-icon {
+   font-size: 24px;
 }
 
 .current-temp {
-   font-size: 45px;
+   font-size: 50px;
    font-weight: 300;
-   vertical-align: sub;
-}
-
-.temp-unit {
-   vertical-align: super;
-   font-size: 20px;
+   margin-left: 105px;
 }
 
 .unit {
    vertical-align: super;
-   font-size: 50%;
+   font-size: 40%;
+   margin-left: -2px;
 }
 
-
-/* 03 ----- Page Structure ----- */
 .weather-container {
-   background-color: rgb(254, 255, 255);
+   background-image: url("../img/sunset.jpg");
    background-repeat: no-repeat;
    background-size: cover;
-   color: black;
+   color: white;
    width: 320px;
    min-height: 538px;
    margin-top: 150px;
@@ -66,44 +52,59 @@ body {
    z-index:2;
 }
 
-.current-desc {
-   display: inline;
-   padding-top: 20px;
-}
-
-.temp-button {
-   padding-top: 10px;
-}
 
 .current-weather {
-   width: 200px;
+   display: block;
    margin: 0 auto;
 }
 
-.forecast-list {
-   display: flex;
+.current-desc-display {
+   margin-top: -15px;
 }
 
-.weekdays {
-   display: block;
-}
-
-
-/* 04 ----- Content & Media ----- */
-.current-icon {
-   font-size: 24px;
-}
-
-#toggle-button {
+#unit-toggle {
    background: none;
    border: none;
    color: inherit;
    text-shadow: 2px, 2px, 2px, inherit;
+   padding-top: 20px;
 }
 
+.forecast-list {
+  display: block;
+  margin-top: 85px;
+}
 
-/* 05 ----- Footer ----- */
+.weekdays {
+   display: inline-flex;
+   flex-direction: column;
+}
 
+#weekday-1 {
+   border-right: 1px solid;
+   padding-right: 8px;
+}
 
+#weekday-2 {
+   padding: 0px 4px;
+}
 
-/* 06 ----- Miscellaneous ----- */
+#weekday-3 {
+   border-left: 1px solid;
+   padding-left: 8px;
+}
+
+.fc-day {
+   font-size: 14px;
+   font-weight: 300;
+   margin-bottom: 1px;
+}
+
+.fc-temp {
+   font-size: 18px;
+   font-weight: 300;
+}
+
+.fc-icon {
+   font-size: 22px;
+}
