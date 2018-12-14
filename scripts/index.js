@@ -16,8 +16,7 @@ $(document).ready(() => {
         let lon = position.coords.longitude;
         currentUrl += "?lat="+lat+"&lon="+lon+"&APPID="+apiKeyC+"&units=metric";
         forecastUrl += "?lat="+lat+"&lon="+lon+"&APPID="+apiKeyF+"&cnt=4&units=imperial";
-        //sunUrl += "?lat="+lat+"&lng="+lon+"&formatted=0";
-        getSunTimes();
+
         getForecastData();
 
         
@@ -32,8 +31,7 @@ $(document).ready(() => {
           let lon = data.longitude;
           currentUrl += "?lat="+lat+"&lon="+lon+"&APPID="+apiKeyC+"&units=metric";
           forecastUrl += "?lat="+lat+"&lon="+lon+"&APPID="+apiKeyF+"&cnt=4&units=imperial";
-          //sunUrl += "?lat="+lat+"&lng="+lon+"&formatted=0";
-          getSunTimes();
+
           getForecastData();
           
         },
@@ -48,21 +46,64 @@ $(document).ready(() => {
       alert("Oops looks like your browser doesn't support geolocation" );
     };
   }
+  
 
-  function getSunTimes() {
+  function getForecastData() {
     $.ajax({
-      url: currentUrl,
+      url: forecastUrl,
       type: 'GET',
       dataType: 'json',
-      sucess: function(data) {
-        var time = moment().format('MMMM Do YYYY, h:mm:ss a');
-        var code = data.weather[0].id;
-        var sunset = moment.unix(data.sys.sunset).tz().format();
-        var sunrise = moment.unix(data.sys.sunrise).tz().format();
+      success: function(data) {
+        var temp;
+        var fahrenheit = Math.round(temp);
+        var celsius = Math.round((fahrenheit -32) / 1.8);
+        var unitC = '<span class="unit"> &#8451;</span>';
+        var unitF = '<span class="unit"> &#8457;</span>';
 
+
+        $('#city').html(data.city.name);
+
+        for (i = 0; i < data.list.length; i++) {
+          let temp = (data.list[i].main.temp);
+          let fahrenheit = Math.round(temp);
+          let celsius = Math.round((fahrenheit - 32) / 1.8);
+
+          $('#f' + i).html(fahrenheit + unitF);
+          $('#c' + i).html(celsius + unitC).hide();
+
+
+          $('#toggle-button').on('click', () => {
+            $('#f' + i, '#c' + i).toggle();
+          });
+              
+    
+          var icon = data.list[i].weather[0].id;
+          $('#icon' + i).html("<i class='wi wi-owm-" + icon + "'></i>");
+              
+          var desc = data.list[i].weather[0].main;
+          $('#desc' + i).html(desc);
+
+          var dayName = moment().add(i, "day").format("ddd");
+          $('#day' + i).html(dayName);
+        };
+
+        var date = new Date();
+        var time = date.getHours();
+        var code = data.list[0].weather[0].id;
+
+        var day = '../img/day.jpg';
+        var rain = '../img/rain.jpg';
+        var cloudy = '../img/cloudy.jpg';
+        var storm = '../img/storm.jpg';
+        var snow = '../img/snow.jpg';
+        var night = '../img/night.jpg';
+        var nightRain = '../img/night-rain.jpg';
+        var nightCloudy = '../img/night-cloudy.jpg';
         
+      
 
-        if (time == sunset || time == sunrise) {
+
+        if (time > 16 && time < 19) {
           // sunset theme
           if (code >= 200 && code < 240) {
             // thunderstorm theme
@@ -98,7 +139,7 @@ $(document).ready(() => {
               'color': 'white'
             });
           }
-        } else if (time > sunset && time < sunrise) {
+        } else if (time > 19 || time < 6) {
           // night theme
           if (code >= 200 && code < 240) {
             // thunderstorm theme
@@ -164,57 +205,6 @@ $(document).ready(() => {
             });
           }
         };
-      },
-      error: function(err) {
-        console.log(err);
-        $('.weather-container').css({
-          'background-image': 'url("../img/day.jpg")'
-        });
-      }
-    });
-}
-  
-
-  function getForecastData() {
-    $.ajax({
-      url: forecastUrl,
-      type: 'GET',
-      dataType: 'json',
-      success: function(data) {
-        var temp;
-        var fahrenheit = Math.round(temp);
-        var celsius = Math.round((fahrenheit -32) / 1.8);
-        var unitC = '<span class="unit"> &#8451;</span>';
-        var unitF = '<span class="unit"> &#8457;</span>';
-
-        $('#city').html(data.city.name);
-
-        for (i = 0; i < data.list.length; i++) {
-          let temp = (data.list[i].main.temp);
-          let fahrenheit = Math.round(temp);
-          let celsius = Math.round((fahrenheit - 32) / 1.8);
-
-          $('#f' + i).html(fahrenheit + unitF);
-          $('#c' + i).html(celsius + unitC).hide();
-
-
-          $('#toggle-button').on('click', () => {
-            $('#f' + i, '#c' + i).toggle();
-          });
-              
-    
-          var icon = data.list[i].weather[0].id;
-          $('#icon' + i).html("<i class='wi wi-owm-" + icon + "'></i>");
-              
-          var desc = data.list[i].weather[0].main;
-          $('#desc' + i).html(desc);
-
-          var dayName = moment().add(i, "day").format("ddd");
-          $('#day' + i).html(dayName);
-
-          let code = data.list[0].weather[0].id;
-        }
-
       },
       error: function(err) {
         alert('Oops something went wrong, Please try again.');
