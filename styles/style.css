@@ -30,7 +30,7 @@ body {
    padding: 10px;
 }
 
-#temp {
+.current-temp {
    font-size: 45px;
    font-weight: 300;
    vertical-align: sub;
@@ -39,6 +39,11 @@ body {
 .temp-unit {
    vertical-align: super;
    font-size: 20px;
+}
+
+.unit {
+   vertical-align: super;
+   font-size: 50%;
 }
 
 
@@ -61,7 +66,7 @@ body {
    z-index:2;
 }
 
-.weather-desc {
+.current-desc {
    display: inline;
    padding-top: 20px;
 }
@@ -75,9 +80,17 @@ body {
    margin: 0 auto;
 }
 
+.forecast-list {
+   display: flex;
+}
+
+.weekdays {
+   display: block;
+}
+
 
 /* 04 ----- Content & Media ----- */
-i {
+.current-icon {
    font-size: 24px;
 }
 
