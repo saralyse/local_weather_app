@@ -1,5 +1,4 @@
 $(document).ready(() => {
-  var cloudy;
   
   var currentUrl = "https://api.openweathermap.org/data/2.5/weather";
   var forecastUrl = "https://api.openweathermap.org/data/2.5/forecast";
@@ -94,103 +93,53 @@ $(document).ready(() => {
           // sunset theme
           if (code >= 200 && code < 240) {
             // thunderstorm theme
-            $('.weather-container').css({
-              'background-image': 'url("../img/storm.jpg")',
-              'color': 'white'
-            });
+            $('.weather-container').addClass("storm");
           } else if (code >= 300 && code <= 531) {
             // rain theme
-            $('.weather-container').css({
-              'background-image': 'url("../img/rain.jpg")'
-            });
-            $('#city').css({
-              'font-weight': '300'
-            });
-            $('#desc').css({
-              'font-weight': '400'
-            });
+            $('.weather-container').addClass("rain");
           } else if (code >= 600 && code <=622) {
              // snow theme
-            $('.weather-container').css({
-              'background-image': 'url("../img/snow.jpg")'
-            });
+            $('.weather-container').addClass("snow");
           } else if ((code >= 801 && code <= 804) || (code >= 700 && code <= 741)) {
             // cloudy theme
-            $('.weather-container').css({
-              'background-image': 'url("../img/cloudy.jpg")'
-            });
+            $('.weather-container').addClass("cloudy");
           } else {
             // clear
-            $('.weather-container').css({
-              'background-image': 'url("../img/sunset.jpg")',
-              'color': 'white'
-            });
+            $('.weather-container').addClass("sunset");
           }
         } else if (time > 19 || time < 6) {
           // night theme
           if (code >= 200 && code < 240) {
             // thunderstorm theme
-            $('.weather-container').css({
-              'background-image': 'url("../img/storm.jpg")',
-              'color': 'white'
-            });
+            $('.weather-container').addClass("storm");
           } else if (code >= 300 && code <= 531) {
             // rain theme
-            $('.weather-container').css({
-              'background-image': 'url("../img/night-rain.jpg")',
-              'color': 'white'
-            });
+            $('.weather-container').addClass("night-rain");
           } else if (code >= 600 && code <=622) {
              // snow theme
-            $('.weather-container').css({
-              'background-image': 'url("../img/snow.jpg")'
-            });
+            $('.weather-container').addClass("snow");
           } else if ((code >= 801 && code <= 804) || (code >= 700 && code <= 741)) {
             // cloudy theme
-            $('.weather-container').css({
-              'background-image': 'url("../img/night-cloudy.jpg")',
-              'color': 'white'
-            });
+           $('.weather-container').addClass("night-cloudy");
           } else {
             // night clear
-            $('.weather-container').css({
-              'background-image': 'url("../img/night.jpg")',
-              'color': 'white'
-            });
+            $('.weather-container').addClass("night");
           }
         } else {
           if (code >= 200 && code < 240) {
             // thunderstorm theme
-            $('.weather-container').css({
-              'background-image': 'url("../img/storm.jpg")',
-              'color': 'white'
-            });
+            $('.weather-container').addClass("storm");
           } else if (code >= 300 && code <= 531) {
             // rain theme
-            $('.weather-container').css({
-              'background-image': 'url("../img/rain.jpg")'
-            });
-            $('#city').css({
-              'font-weight': '300'
-            });
-            $('#desc').css({
-              'font-weight': '400'
-            });
+            $('.weather-container').addClass("rain");
           } else if (code >= 600 && code <=622) {
              // snow theme
-            $('.weather-container').css({
-              'background-image': 'url("../img/snow.jpg")'
-            });
+            $('.weather-container').addClass("snow");
           } else if ((code >= 801 && code <= 804) || (code >= 700 && code <= 741)) {
             // cloudy theme
-            $('.weather-container').css({
-              'background-image': 'url("../img/cloudy.jpg")',
-              'color': 'white'
-            });
+            $('.weather-container').addClass("cloudy");
           } else {
-            $('.weather-container').css({
-              'background-image': 'url("../img/day.jpg")'
-            });
+            $('.weather-container').addClass("day");
           }
         };
       },
