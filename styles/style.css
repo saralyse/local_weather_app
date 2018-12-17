@@ -1,29 +1,44 @@
+html,body {
+   box-sizing: border-box;
+}
+ *, *:before, *:after {
+   box-sizing: inherit;
+}
+
+html {
+   height: 100%;
+   width: 100%;
+}
+
 body {
+   min-height: 100%;
+   padding: 0;
    background-color: rgb(254, 255, 255);
    font-family: 'Roboto', sans-serif;
    text-shadow: 2px, 2px, 4px, inherit;
    letter-spacing: 1.2px;
+   line-height: calc(1.1em + 0.5vw);
 }
 
 #city {
    font-weight: 200;
-   font-size: 38px;
-   margin-top: 100px;
+   font-size: 5vh;
+   margin-top: 40%;
    margin-bottom: 25px;
 }
 
 .current-desc {
-   font-size: 24px;
+   font-size: 3vh;
    font-weight: 300;
    padding-left: 6px;
 }
 
 .current-icon {
-   font-size: 24px;
+   font-size: 3vh;
 }
 
 .current-temp {
-   font-size: 50px;
+   font-size: 6vh;
    font-weight: 300;
    margin-left: 10px;
 }
@@ -35,35 +50,25 @@ body {
 }
 
 .weather-container {
+   background-image: url('https://i.imgur.com/H5XMHIm.jpg');
+   height: 80vh;
+   width: calc(80vh * (9/16));
+   margin-top: 5%;
    color: black;
    background-repeat: no-repeat;
    background-size: cover;
-   width: 320px;
-   height: 568px;
-   margin-top: 150px;
-   padding: 10px 0;
    display: inline-block;
    position: relative;
    border-radius: 10px;
    box-shadow: 0px 40px 150px 10px rgba(69, 69, 69, 0.5);
    overflow: hidden;
-   transition: background .3s ease-out;
-}
-
-.weather-container::before {
-   width: 320px;
-   height: 568px;
-   margin-top: 150px;
-   padding: 10px 0;
-   position: absolute;
-   z-index: -2;
-   opacity: 0.4;
 }
 
 
 .current-weather {
    display: block;
    margin: 0 auto;
+   position: relative;
 }
 
 .current-desc-display {
@@ -80,7 +85,8 @@ body {
 
 .forecast-list {
   display: inline-flex;
-  margin-top: 70px;
+  margin-top: 50%;
+  position: relative;
 }
 
 .weekdays {
@@ -90,39 +96,32 @@ body {
 
 #weekday-1 {
    border-right: 1px solid;
-   padding-right: 8px;
+   padding-right: 10px;
 }
 
 #weekday-2 {
-   padding: 0px 4px;
+   padding: 0px 10px;
 }
 
 #weekday-3 {
    border-left: 1px solid;
-   padding-left: 8px;
+   padding-left: 10px;
 }
 
 .fc-day {
-   font-size: 14px;
+   font-size: 1.75vh;
    font-weight: 300;
    margin-bottom: 1px;
 }
 
 .fc-temp {
-   font-size: 18px;
+   font-size: 2.5vh;
    font-weight: 300;
 }
 
 .fc-icon {
-   font-size: 22px;
+   font-size: 2.8vh;
 }
-
-@media only screen and (max-width: 480px)  {
-   .weather-container {
-     width: 100vw;
-     height: 100vh;
-   }
- }
 
 .sunset {
    background-image: url('https://i.imgur.com/mNFKeib.jpg');
@@ -165,4 +164,61 @@ body {
 
 .cloudy {
    background-image: url('https://i.imgur.com/H5XMHIm.jpg');
+   color: white;
 }
+
+@media only screen and (max-width: 480px)  {
+   .weather-container {
+     width: 80vw;
+     height: 100vh;
+     padding: 0;
+     margin: 0 auto;
+     box-shadow: none;
+   }
+   #city {
+      font-weight: 200;
+      font-size: 6.5vh;
+      margin-top: 150px;
+      margin-bottom: 25px;
+   }
+   
+   .current-desc {
+      font-size: 3vh;
+      font-weight: 300;
+      padding-left: 6px;
+   }
+   
+   .current-icon {
+      font-size: 3vh;
+   }
+   
+   .current-temp {
+      font-size: 6vh;
+      font-weight: 300;
+      margin-left: 10px;
+   }
+   .fc-day {
+      font-size: 2.8vh;
+      font-weight: 300;
+      margin-bottom: 10px;
+   }
+   
+   .fc-temp {
+      font-size: 3vh;
+      font-weight: 300;
+   }
+   
+   .fc-icon {
+      font-size: 3.1vh;
+   }
+   .forecast-container {
+      background: rgba(245, 245, 245, 0.226);
+      color: black !important;
+      padding: 200px;
+    }
+
+    .forecast-list {
+      display: inline-flex;
+      margin-top: 200px;
+    }
+ }
