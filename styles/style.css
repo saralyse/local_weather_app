@@ -79,12 +79,12 @@ body {
 }
 
 .forecast-list {
-  display: block;
+  display: inline-flex;
   margin-top: 70px;
 }
 
 .weekdays {
-   display: inline-flex;
+   display: flex;
    flex-direction: column;
 }
 
