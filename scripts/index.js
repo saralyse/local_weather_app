@@ -1,6 +1,4 @@
 $(document).ready(() => {
-  
-  var currentUrl = "https://api.openweathermap.org/data/2.5/weather";
   var forecastUrl = "https://api.openweathermap.org/data/2.5/forecast";
   //var apiKeyC = '5784cd5acade608a751f7a6777f5b158';
   var apiKeyF = 'c1c8298c3ffde842d6161c2da1ceb5b0';
@@ -11,12 +9,9 @@ $(document).ready(() => {
       navigator.geolocation.getCurrentPosition(function(position) { 
         let lat = position.coords.latitude;
         let lon = position.coords.longitude;
-        //currentUrl += "?lat="+lat+"&lon="+lon+"&APPID="+apiKeyC+"&units=metric";
-        forecastUrl += "?lat="+lat+"&lon="+lon+"&APPID="+apiKeyF+"&cnt=4&units=imperial";
+        forecastUrl += "?lat="+lat+"&lon="+lon+"&APPID="+apiKeyF+"&cnt=4&units=metric";
 
         getForecastData();
-
-        
       });
     } else if (!navigator.geolocation) {
       $.ajax({
@@ -27,10 +22,9 @@ $(document).ready(() => {
           let lat = data.latitude;
           let lon = data.longitude;
           //currentUrl += "?lat="+lat+"&lon="+lon+"&APPID="+apiKeyC+"&units=metric";
-          forecastUrl += "?lat="+lat+"&lon="+lon+"&APPID="+apiKeyF+"&cnt=4&units=imperial";
+          forecastUrl += "?lat="+lat+"&lon="+lon+"&APPID="+apiKeyF+"&cnt=4&units=metric";
 
           getForecastData();
-          
         },
         error: function(error) {
           
@@ -51,10 +45,7 @@ $(document).ready(() => {
       type: 'GET',
       dataType: 'json',
       success: function(data) {
-        var temp;
-        var fahrenheit = Math.round(temp);
-        //var celsius = Math.round((fahrenheit -32) / 1.8);
-        //var unitC = '<span class="unit"> &#8451;</span>';
+        var unitC = '<span class="unit"> &#8451;</span>';
         var unitF = '<span class="unit"> &#8457;</span>';
 
 
@@ -63,28 +54,73 @@ $(document).ready(() => {
 
         for (i = 0; i < data.list.length; i++) {
           let temp = (data.list[i].main.temp);
-          let fahrenheit = Math.round(temp);
-          //let celsius = Math.round((fahrenheit - 32) / 1.8);
+          let celsius = Math.round(temp);
+          let fahrenheit = Math.round(celsius * 1.8 + 32);
 
-          $('#f' + i).html(fahrenheit + unitF);
-          //$('#c' + i).html(celsius + unitC).hide();
+          $('#temp' + i).html(fahrenheit + unitF);
+         
 
-
-          //$('#toggle-unit').on('click', () => {
-            //$('#f' + i, '#c' + i).toggle();
-          //});
+          /*
+          $('.toggle .btn').on("click", () => {
+            if ($('.toggle').attr('id') =='c') {
+              $('#temp' + i).html(fahrenheit + unitF);
+              $('.toggle').attr('id','f');
+            } else if ($('.toggle').attr('id') == 'f') {
+              $('#temp' + i).html(celsius + unitC)
+              $('.toggle').attr('id','c');
+            }
+          });
+          */
               
-    
           var icon = data.list[i].weather[0].id;
           $('#icon' + i).html("<i class='wi wi-owm-" + icon + "'></i>");
 
           var desc = data.list[i].weather[0].main;
           $('#desc' + i).html(desc);
 
+          //translate wind direction
+          
+          function windDirection(dir) {
+            var dirArr = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+            var points = Math.floor(dir / 45);
+            return dirArr[points];
+          }
+
+          var windDir = windDirection(data.list[0].wind.deg);
+
+
+          // Extra info for more toggle
+          $('#min-temp').html("Low Temp: " + Math.round(data.list[0].main.temp_min)+unitF);
+          $('#max-temp').html("High Temp: " + Math.round(data.list[0].main.temp_max)+ unitF);
+          $('#humidity').html("Humidity: " + Math.round(data.list[0].main.humidity) + "%");
+          $('#clouds').html("Cloud Cover: " + Math.round(data.list[0].clouds.all) + "%");
+          $('#wind').html("Wind Speed: " + data.list[0].wind.speed + " mph");
+          $('#wind-dir').html("Wind Direction: " + windDir);
+
+
+          $('#current-details').hide();
+          $('#arrow-up').hide();
+
+          $('#arrow-down').on("click", () => {
+            $('#current-details').slideDown("slow");
+            $('#arrow-down').hide("slow");
+            $('#arrow-up').show("slow");
+          })
+
+          $('#arrow-up').on("click", () => {
+            $('#current-details').slideUp("slow");
+            $('#arrow-up').hide("slow");
+            $('#arrow-down').show("slow");
+          })
+
+
+          // Add days of week to 3 day forecast
           var dayName = moment().add(i, "day").format("ddd");
           $('#day' + i).html(dayName);
         };
 
+
+        // Add background class based on current weather
         var date = new Date();
         var time = date.getHours();
         var code = data.list[0].weather[0].id;

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html>
    <head>
-         <meta name="viewport" content="width=device-width, initial-scale=1">
-         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-         <link href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400" rel="stylesheet">
-         <link rel="stylesheet" href="styles/style.css">
-         <link rel="stylesheet" href="styles/weather-icons.min.css">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+      <link href="https://fonts.googleapis.com/css?family=Roboto:100,200,300,400" rel="stylesheet">
+      <link rel="stylesheet" href="styles/style.css">
+      <link rel="stylesheet" href="styles/weather-icons.min.css">
    </head>
    <body>
       <div class="container text-center">
@@ -17,13 +18,25 @@
                <div class="temp-desc-container">
                   <div class="current-temp-display">
                      <button class="btn" id="unit-toggle">
-                        <span class="current-temp" id="f0" value="f"></span>
+                        <span class="current-temp toggle-f" id="temp0" value="f"></span>
                         <span class="current-temp toggle-c" id="c0" value="c"></span>
                      </button>
                   </div>
                   <div class="current-desc-display container">
                      <span class="current-icon" id="icon0"></span><span class="current-desc" id="desc0"></span>
                   </div>
+               </div>
+               <div id="arrows">
+                  <span class="arrow-down" id="arrow-down"><i class="fa fa-angle-down"></i></span>
+                  <span class="arrow-up" id="arrow-up"><i class="fa fa-angle-up"></i></span>
+               </div>
+               <div class="container" id="current-details">
+                  <span id="min-temp"></span>
+                  <span id="max-temp"></span>
+                  <span id="humidity"></span>
+                  <span id="clouds"></span>
+                  <span id="wind"></span>
+                  <span id="wind-dir"></span>
                </div>
             </div>
             <div class="forecast container">
@@ -32,7 +45,7 @@
                      <span class="fc-day" id="day1"></span>
                      <div class="icon-temp">
                         <span class="fc-icon" id="icon1"></span>
-                        <span class="fc-temp toggle-f" id="f1" value="f"></span>
+                        <span class="fc-temp toggle-f" id="temp1" value="f"></span>
                         <span class="fc-temp toggle-c" id="c1" value="c"></span>
                      </div> 
                   </div>
@@ -40,7 +53,7 @@
                      <span class="fc-day" id="day2"></span>
                      <div class="icon-temp">
                         <span class="fc-icon" id="icon2"></span>
-                        <span class="fc-temp toggle-f" id="f2" value="f"></span>
+                        <span class="fc-temp toggle-f" id="temp2" value="f"></span>
                         <span class="fc-temp toggle-c" id="c2" value="c"></span>
                      </div>
                   </div>
@@ -48,12 +61,17 @@
                      <span class="fc-day" id="day3"></span>
                      <div class="icon-temp">
                         <span class="fc-icon" id="icon3"></span>
-                        <span class="fc-temp toggle-f" id="f3" value="f3"></span>
+                        <span class="fc-temp toggle-f" id="temp3" value="f3"></span>
                         <span class="fc-temp toggle-c" id="c3" value="c"></span>
                      </div>
                   </div>
                </div>
             </div>
+            <!---
+            <div class="toggle" id="f">
+               <button type="button" class="btn" id="toggle-temp">f / c</button>
+            </div>
+            --->
          </div>
       </div>
 
